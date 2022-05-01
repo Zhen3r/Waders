@@ -6,15 +6,16 @@ MUSA 611 Final Project
 
 [Project Website (To be linked)]()
 
-<img title="" src="img/website.png" alt="">
+<img title="" src="media/website.png" alt="">
 
 ## Project Proposal
 
-- [Abstract](#abstract)
-- [Goal](#goal)
-- [Stakeholders](#stakeholders)
-- [Decisions](#decisions)
-- [Data sources](#data-sources)
+- [Wader](#wader)
+  - [Project Proposal](#project-proposal)
+    - [Abstract](#abstract)
+    - [Goal](#goal)
+    - [Users](#users)
+    - [Data sources](#data-sources)
 
 ### Abstract
 
@@ -48,3 +49,7 @@ The project will focus mainly on a summer of several waders. In particular:
 - Wiki: [Great Knot Wikipedia](https://en.wikipedia.org/wiki/Great_knot)
 - Beautiful wind visualization insparation from [earth.nullschool.net](https://earth.nullschool.net/)
 - Saving a Flyway [Blog](https://birdingbeijing.com/2021/05/23/saving-a-flyway/)
+- [NOAA Wind Speed Data](https://www.ncei.noaa.gov/products/weather-climate-models/)
+- [Leaflet Velocity](https://github.com/onaci/leaflet-velocity) for wind visualization
+- [NASA](https://appeears.earthdatacloud.nasa.gov/) land cover images from 2005 to 2020
+

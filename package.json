@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "georaster": "^1.5.6",
     "http-server": "^14.1.0",
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1"
@@ -13,6 +14,7 @@
     "globals": {
       "L": "readonly",
       "_": "readonly",
+      "$": "readonly",
       "document": "readonly",
       "fetch": "readonly",
       "htmlToElement": "readonly",
@@ -25,6 +27,8 @@
       "no-multiple-empty-lines": "off",
       "no-multi-spaces": "off",
       "prefer-const": "off",
+      "no-use-before-define": "off",
+      "no-undef": "off",
       "no-restricted-syntax": [
         "error",
         {

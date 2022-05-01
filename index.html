@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Waders - MUSA 611 Final Proj</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.0.2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="res/style.css">
+    <link rel="stylesheet" href="res/leaflet-velocity.css" />
+</head>
+
+<body>
+    <div class="navigation">
+        <img src="media/logo.svg" alt="" id="logo">
+    </div>
+
+    <div class="front-page">
+        <div class="front-background">
+            <video src="media/knot.mp4" autoplay loop muted></video>
+        </div>
+        <div class="poem">
+            <p>There they are again</p>
+            <p>Those citizens of nowhere,</p>
+            <p>Blazing through the skies</p>
+            <p>On their various epic journeys,</p>
+            <p>Bothering the somewheres</p>
+            <p>With their flighty existence.</p>
+            <p>They were born to move.</p>
+            <blockquote>-- Mahima Sukhdev</blockquote>
+            <div></div>
+        </div>
+    </div>
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+
+    <div class="section card" id="card-1">
+        <div class="card-body">
+            <h4 class="card-title">Have you met... the Great Knots?</h4>
+            <h5 class="card-subtitle">One of the greatest waders</h5>
+            <div class="card-text">
+                <p>
+                    Hi, come to know `Great Knot` (Calidris tenuirostris)! It is a small wader, but also a great
+                    long-distance migratory shorebird of the East Asian-Australasian Flyway.
+                </p>
+                <p>
+                    Here is a great knot~ Her tag may say "XNC", but she is <b>Beak Beak</b> to the reseacher. As a
+                    "research
+                    assistant" of Deakin University, Australia, Beak Beak will carry a small solar-satellite device
+                    throughout this summer. Let's see how is she doing.
+                </p>
+            </div>
+            <br>
+            <img src="media/knot.png" id="img-knot" alt="" srcset="">
+        </div>
+    </div>
+    <div class="section">
+        <div class="card-body">
+            <h4 class="card-title"><b>Beak-Beak</b>'s Home</h4>
+            <h5 class="card-subtitle">(Actually, it's one of her homes.)</h5>
+            <div class="card-text">
+                <p>
+                    This is Beak Beak's home in Broome, Australia. A beautiful beach with lots of molluscs and insects.
+                </p>
+                <img src="media/broome.jpg" alt="" srcset="" class="card-img">
+                <p class="mt-3">
+                    Getting into the late March, it will soon be cold here... Maybe it's time for Beak-Beak to start!!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="card-body">
+            <h4 class="card-title">Journey with Wind </h4>
+            <h5 class="card-subtitle">Leveraging the power of nature</h5>
+            <div class="card-text">
+                <p>
+                    Sometimes, Beak Beak can easily fly over the Indian Ocean and even the South China Sea with the
+                    help of the power of subtropical monsoon. With some good luck, the wind speed can reach up to
+                    <b>50 kilometers per hour</b>.
+                </p>
+                <p>
+                    It'll take Beak-Beak around 10-15 days to get to the east China, and get some rest there.
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="card-body">
+            <h4 class="card-title">A BIG Meal!!</h4>
+            <h5 class="card-subtitle">Swamp, Beach, and Marsh</h5>
+            <div class="card-text">
+                <p>
+                    Unknowingly, it's mid April. It's time to get some energy to move on. Yellow Sea is its chance to
+                    have a good meal on the journey. The beaches, swamps and marshes with lots of molluscs and insects
+                    are like a cafeteria for her.
+                </p>
+
+                <img src="media/knot-2.png" class="card-img">
+                <small>Source: <a href="https://www.youtube.com/watch?v=KMKP8Zvvy0U">
+                        [EAAFP] World Migratory Bird Day 2020</a> </small>
+
+                <p class="mt-3">
+                    With its beak full of receptors, it goes deep into the soil of 3-5cm and looks for its lunch. During
+                    the following month, she will constantly travel to and from the Yellow Sea of China and change
+                    different restaurants every day.
+                </p>
+                <p>
+
+                    It is worth noting that due to the excessive development of coastal maps in recent years, such good
+                    restaurants (wetlands) have become less and less. (to be supplemented)
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="section section-raster">
+        <div class="card-body">
+            <h4 class="card-title">A restaurant on the brink of bankruptcy</h4>
+            <h5 class="card-subtitle">Marshes and Reclamation</h5>
+            <div class="card-text">
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut error sed facilis et animi, distinctio
+                    accusantium numquam neque ab aliquam temporibus culpa! Expedita, ex animi eaque, quisquam vitae hic
+                    ducimus quod aperiam aliquam architecto optio, placeat voluptatum ipsum. Quia vitae eaque iste omnis
+                    ipsa odio quis. Nemo accusamus natus quaerat?
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- page 5 -->
+    <div class="section">
+        <div class="card-body">
+            <h4 class="card-title">Finish of the Journey</h4>
+            <h5 class="card-subtitle">What a summer!</h5>
+            <div class="card-text">
+
+                <p>
+                    Many sandpipers form monogamous pairs, so does Beak Beak. She meets her husband in northeast
+                    Siberia. They finds a tundra that is perfect for babies.
+                </p>
+                <p>
+                    They exchange on the nest in the morning and in the evening so that their incubation rhythm follows
+                    a 24-hour day. Their children hatch after about three weeks of incubation and are able to walk and
+                    forage within a few hours of hatching. Beak Beak and her husband guide and brood their children
+                    together.
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="section">
+        <div class="card-body">
+            <h4 class="card-title">6</h4>
+            <h5 class="card-subtitle">Leveraging the power of nature</h5>
+            <div class="card-text">
+                <p>
+                    Sometimes, Beak Beak can easily fly over the Indian Ocean and even the South China Sea with the
+                    help of the power of subtropical monsoon. With some good luck, the wind speed can reach up to
+                    <b>50 kilometers per hour</b>.
+                </p>
+                <p>
+                    It'll take Beak-Beak around 10-15 days to get to the east China, and get some rest there.
+                </p>
+
+            </div>
+        </div>
+    </div> -->
+
+
+
+    <div class="section">
+        <div class="card-body">
+            <h4 class="card-title">To Be Continued...</h4>
+            <p class="mt-5">More details, backgrounds, environments, and related data are going to be added.</p>
+        </div>
+    </div>
+
+    <footer>
+
+        <h5>Data Sources:</h5>
+        <ul>
+            <li>
+                Great Knot Geometry and Track Data: <a
+                    href="https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study215137383">MoveBank</a>
+            </li>
+            <li>Lisovski, S., Gosbell, K., Hassell, C. and Minton, C. 2016 Tracking the full annual-cycle of the Great
+                Knot Calidris tenuirostris, a long-distance migratory shorebird of the East Asian-Australasian Flyway.
+                Wader Study. <a
+                    href="https://www.researchgate.net/publication/311512725_Tracking_the_full_annual-cycle_of_the_Great_Knot_Calidris_tenuirostris_a_long-distance_migratory_shorebird_of_the_East_Asian-Australasian_Flyway">Article</a>
+            </li>
+            <li>[EAAFP] World Migratory Bird Day 2020 (Eng) <a
+                    href="https://www.youtube.com/watch?v=KMKP8Zvvy0U">Youtube</a></li>
+
+            <li>Wiki: <a href="https://en.wikipedia.org/wiki/Great_knot">Great Knot Wikipedia</a></li>
+            <li>Beautiful wind visualization insparation from <a
+                    href="https://earth.nullschool.net/">earth.nullschool.net</a></li>
+            <li>Saving a Flyway <a href="https://birdingbeijing.com/2021/05/23/saving-a-flyway/">Blog</a></li>
+        </ul>
+
+        <h5>Author:</h5>
+        <div>
+            <p>Zh3n <a href="https://github.com/Zhen3r/musa-611-spring-2022-week7">GitHub Repo</a></p>
+            <p>Special thanks to Mjumbe Poe and MUSA611 2022</p>
+        </div>
+    </footer>
+
+    <svg height="0" display="none">
+        <linearGradient id="gradient1">
+            <stop id="stop1" offset="0%" stop-color="darkorange" />
+            <stop id="stop2" offset="100%" stop-color="gray" stop-opacity="0.5" />
+        </linearGradient>
+    </svg>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://unpkg.com/georaster-layer-for-leaflet/dist/georaster-layer-for-leaflet.min.js"></script>
+    <script src="res/leaflet-velocity.js"></script>
+    <script src="res/L.CanvasLayer.js"></script>
+    <script src="res/nav.js"></script>
+
+    <script src="res/main.js"></script>
+
+
+
+
+
+</body>
+
+</html>

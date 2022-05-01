@@ -1,0 +1,169 @@
+/* @font-face {
+  font-family: futura;
+  src: url(res/futura.ttf);
+} */
+
+body {
+    padding: 0;
+    font-family: futura, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    scroll-behavior: smooth;
+}
+
+.front-page {
+    position: relative;
+}
+
+.front-background {
+    position: fixed;
+    bottom: 0;
+    z-index: -1;
+    margin-top: -100vh;
+    height: 100vh;
+    width: 100%;
+}
+
+.front-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.2);
+}
+
+.front-background::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 200vh;
+    backdrop-filter: blur(4px) brightness(.8);
+    /* apply the blur */
+    pointer-events: none;
+    /* make the overlay click-through */
+    z-index: 100;
+}
+
+div.navigation {
+    height: 150px;
+    width: 100%;
+    position: fixed;
+    top: 40vh;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#logo {
+    max-width: 600px;
+    height: 70%;
+}
+
+
+.poem {
+    text-align: center;
+    margin-top: 100vh;
+    color: aliceblue;
+    font-size: large;
+}
+
+.poem>blockquote {
+    margin-top: 3rem;
+    margin-bottom: 0;
+}
+
+.poem div {
+    height: 30vh;
+}
+
+.map-container {
+    height: calc(100vh - 50px);
+    width: 100%;
+    top: 50px;
+    z-index: auto;
+    position: sticky;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+div.section {
+    position: relative;
+    /* height: 80vh; */
+    min-height: 30vh;
+    pointer-events: none;
+    z-index: 10;
+    margin: 0 20px;
+    margin-bottom: 300vh;
+    margin-left: 100px;
+    width: 0.4vw;
+    min-width: 400px;
+    color: lightgray;
+    background-color: #111111;
+}
+
+div.section-raster {
+    margin-top: -200vh;
+    margin-bottom: 300vh;
+}
+
+div.section:last-of-type {
+    margin-bottom: 50vh;
+}
+
+footer {
+    position: relative;
+    background-color: black;
+    color: gray;
+    z-index: 15;
+    padding: 5rem;
+}
+
+
+/* .leaflet-zoom-anim .leaflet-zoom-animated {
+    transition-duration: 10s;
+} */
+.card-subtitle {
+    margin-bottom: 1rem;
+    color: gray;
+}
+
+b {
+    color: darkgoldenrod;
+}
+
+
+#img-knot {
+    width: 150%;
+    margin-bottom: -60px;
+}
+
+.leaflet-tooltip {
+    background-color: #111111;
+    color: lightgray;
+    border-color: #111111;
+}
+
+#card-1 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 80vh;
+}
+
+a {
+    color: white;
+}
+
+footer div p {
+    margin-bottom: 0.1rem;
+
+}
+
+small {
+    font-size: smaller;
+}
+
+.leaflet-traced-pane path {
+    stroke-dasharray: 0, 1000000;
+    /* stroke: url(#gradient1) */
+}

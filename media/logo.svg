@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.3 10.07">
+    <defs>
+        <style>
+            .svg-path {
+                fill: white;
+                transform-box: fill-box;
+            }
+
+            .svg-circle {
+                transform-box: inherit;
+                animation: blink 8s ease-out infinite;
+                transform-origin: 22.8px 3.5px;
+            }
+
+            .svg-a {
+                animation: move-a 8s cubic-bezier(0.16, 0.43, 0.39, 1.69) infinite;
+                transform-origin: center;
+            }
+
+            @keyframes move-a {
+
+                36%,
+                49% {
+                    transform: rotate(0);
+                }
+
+                40%,
+                45% {
+                    transform: translate(-1.3px) rotate(90deg) scale(1.25, 1);
+                }
+            }
+
+            @keyframes blink {
+
+                from,
+                50%,
+                61.5%,
+                72%,
+                to {
+                    transform: scaleY(0);
+                }
+
+                52%,
+                60%,
+                63%,
+                70% {
+                    transform: scaleY(1);
+                }
+            }
+        </style>
+    </defs>
+    <path class="svg-path" d="M1.48.44,3.84,6.49,6.3,0,8.65,6.49l2.51-6h1.48l-4,9.62L6.27,3.65,3.84,10.07,0,.44Z" />
+    <path class="svg-path" d="M33.64,1.72H30V3.9h3.53V5.18H30v3h3.63V9.49h-5v-9h5Z" />
+    <path class="svg-path" d="M38.5,5.63l2.8,3.86H39.63L37,5.78H36.8V9.49H35.43v-9H37a4,4,0,0,1,2.59.67,2.46,2.46,0,0,1,.88,2A2.57,2.57,0,0,1,40,4.75,2.46,2.46,0,0,1,38.5,5.63Zm-1.7-1h.43c1.3,0,1.94-.49,1.94-1.48s-.63-1.39-1.88-1.39H36.8Z" />
+    <path class="svg-path" d="M25.53,1.61A3.84,3.84,0,0,0,24,.71,6.94,6.94,0,0,0,21.83.44H20.34a1.29,1.29,0,0,0-.4.07v8.9a1.42,1.42,0,0,0,.42.08h1.45a6.9,6.9,0,0,0,2.13-.26,4.16,4.16,0,0,0,1.53-.89A4.28,4.28,0,0,0,26.93,5,4.3,4.3,0,0,0,25.53,1.61Zm-1,5.75a3.17,3.17,0,0,1-1.1.65,5.15,5.15,0,0,1-1.53.19H21.3V1.72h.62a3.78,3.78,0,0,1,2.64.83,3.15,3.15,0,0,1,1,2.41A3.09,3.09,0,0,1,24.55,7.36Z" />
+    <path class="svg-path svg-a" d="M19.94.51a2.4,2.4,0,0,0-.51.24l-6.7,4.13,6.85,4.38a1.94,1.94,0,0,0,.36.15V8l-1.65-1L15,4.91,19.94,2Z" />
+    <circle cx="22.8" cy="3.5" r="0.8" class="svg-path svg-circle" />
+</svg>
