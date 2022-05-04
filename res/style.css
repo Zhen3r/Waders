@@ -1,6 +1,9 @@
 @font-face {
     font-family: futura;
-    src: url(media/futura.ttf);
+    src:
+        url(media/futura.woff2) format('woff2'),
+        url(media/futura.woff) format('woff'),
+        url(media/futura.ttf) format('truetype');
 }
 
 * {
