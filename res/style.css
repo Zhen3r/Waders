@@ -1,9 +1,9 @@
 @font-face {
     font-family: futura;
     src:
-        url(media/futura.woff2) format('woff2'),
-        url(media/futura.woff) format('woff'),
-        url(media/futura.ttf) format('truetype');
+        url(../media/futura.woff2) format('woff2'),
+        url(../media/futura.woff) format('woff'),
+        url(../media/futura.ttf) format('truetype');
 }
 
 * {
@@ -248,5 +248,9 @@ small {
 
     #logo {
         max-width: 70vw;
+    }
+
+    footer {
+        padding: 2rem;
     }
 }

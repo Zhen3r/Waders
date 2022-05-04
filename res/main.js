@@ -333,6 +333,8 @@ sectionRenderer[7] = () => {
   }).addTo(allLayers);
 };
 
+
+sectionRenderer[8] = () => { };
 // L.canvasLayer()
 //   .delegate(this)
 //   .addTo(map);
