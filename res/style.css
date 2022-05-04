@@ -1,7 +1,7 @@
-/* @font-face {
-  font-family: futura;
-  src: url(res/futura.ttf);
-} */
+@font-face {
+    font-family: futura;
+    src: url(media/futura.ttf);
+}
 
 body {
     padding: 0;
