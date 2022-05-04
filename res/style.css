@@ -9,6 +9,15 @@ body {
     scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+    /* height: 10px; */
+}
+
+a:hover {
+    color: orange;
+}
+
 .front-page {
     position: relative;
 }
@@ -78,7 +87,7 @@ div.navigation {
     height: calc(100vh - 50px);
     width: 100%;
     top: 50px;
-    z-index: auto;
+    z-index: 0;
     position: sticky;
 }
 
@@ -87,11 +96,50 @@ div.navigation {
     height: 100%;
 }
 
+.timeline {
+    position: fixed;
+    top: 20vh;
+    left: calc(100vw - 20px);
+    height: 60vh;
+    width: 20px;
+    z-index: 0;
+}
+
+.timeline-axis {
+    height: 100%;
+    width: 1.5px;
+    position: relative;
+}
+
+.timeline-axis-fill {
+    /* height: 100%; */
+    width: 100%;
+    background-color: #FFF9;
+}
+
+.timeline-axis-line {
+    position: absolute;
+    top: 0;
+    margin-left: 0.5px;
+    height: 100%;
+    width: 1px;
+    background-color: #FFF3;
+}
+
+.timeline-pop {
+    position: relative;
+    left: -0.75rem;
+    color: white;
+    font-size: x-small;
+    text-align: center;
+    width: 20px;
+}
+
 div.section {
     position: relative;
     /* height: 80vh; */
     min-height: 30vh;
-    pointer-events: none;
+    /* pointer-events: none; */
     z-index: 10;
     margin: 0 20px;
     margin-bottom: 300vh;
@@ -102,20 +150,15 @@ div.section {
     background-color: #111111;
 }
 
-div.section-raster {
-    margin-top: -200vh;
-    margin-bottom: 300vh;
-}
-
 div.section:last-of-type {
-    margin-bottom: 50vh;
+    margin-bottom: 150vh;
 }
 
 footer {
     position: relative;
     background-color: black;
     color: gray;
-    z-index: 15;
+    z-index: 10;
     padding: 5rem;
 }
 
@@ -166,4 +209,37 @@ small {
 .leaflet-traced-pane path {
     stroke-dasharray: 0, 1000000;
     /* stroke: url(#gradient1) */
+}
+
+.leaflet-poly-pane {
+    opacity: 0;
+}
+
+.coastline-1960 {
+    color: #07c66a;
+}
+
+.coastline-2016 {
+    color: #ff4848;
+}
+
+@media screen and (max-width:700px) {
+    div.section {
+        margin: auto;
+        margin-bottom: 300vh;
+        width: 95vw;
+        min-width: unset;
+        max-width: 400px;
+    }
+
+    #img-knot {
+        width: 150%;
+        max-width: 50vw;
+        min-width: 100%;
+        margin-bottom: -60px;
+    }
+
+    #logo {
+        max-width: 70vw;
+    }
 }

@@ -52,4 +52,5 @@ The project will focus mainly on a summer of several waders. In particular:
 - [NOAA Wind Speed Data](https://www.ncei.noaa.gov/products/weather-climate-models/)
 - [Leaflet Velocity](https://github.com/onaci/leaflet-velocity) for wind visualization
 - [NASA](https://appeears.earthdatacloud.nasa.gov/) land cover images from 2005 to 2020
+- http://www.jhyqy.com.cn/cn/article/doi/10.16028/j.1009-2722.2019.064 
 

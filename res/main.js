@@ -8,6 +8,11 @@ let map = L.map('map', {
   // preferCanvas: true,
 });
 
+map.on('click', (e) => {
+  let xy = e.latlng;
+  console.log(xy.lat, xy.lng);
+});
+
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   subdomains: 'abcd',
@@ -21,6 +26,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
 
 let allLayers = L.layerGroup().addTo(map);
 map.createPane('traced');
+map.createPane('poly');
 
 // https://stackoverflow.com/questions/34897704/use-svg-as-map-using-leaflet-js
 
@@ -48,8 +54,8 @@ class Camera {
     this.destinationY = y;
   }
 
-  update() {
-    this.zoom = this.map.getZoom();
+  update(z = undefined, zoomTime = undefined) {
+    this.zoom = z || this.map.getZoom();
 
     // this.dx = (this.destinationX - this.x) * this.v;
     // this.dy = (this.destinationY - this.y) * this.v;
@@ -65,11 +71,22 @@ class Camera {
     // this.x = this.x + this.dx;
     // this.y = this.y + this.dy;
 
-    this.map.setView(
-      [this.destinationX, this.destinationY],
-      this.zoom,
-      { animate: true, duration: 1 },
-    );
+    let offsetx = window.innerWidth < 700 ? 0 : 230;
+
+    let targetPoint = this.map.project([this.destinationX, this.destinationY], this.zoom)
+      .subtract([offsetx, 0]);
+    let targetLatLng = this.map.unproject(targetPoint, this.zoom);
+
+    if (zoomTime) {
+      this.map.flyTo(targetLatLng, z, { duration: zoomTime });
+    } else {
+      this.map.setView(
+        // [this.destinationX, this.destinationY],
+        targetLatLng,
+        this.zoom,
+        { animate: true, duration: 1 },
+      );
+    }
   }
 
   // draw() {
@@ -104,12 +121,12 @@ $.getJSON('data/trail-great.geojson', (data) => {
 let windLayer;
 $.getJSON('data/wind-global.json', (data) => {
   windLayer = L.velocityLayer({
-    displayValues: true,
-    displayOptions: {
-      velocityType: 'Global Wind',
-      position: 'bottomleft',
-      emptyString: 'No wind data',
-    },
+    // displayValues: true,
+    // displayOptions: {
+    //   velocityType: 'Global Wind',
+    //   position: 'bottomleft',
+    //   emptyString: 'No wind data',
+    // },
     data,
     // minVelocity: 10,
     // maxVelocity: 15,
@@ -121,25 +138,16 @@ $.getJSON('data/wind-global.json', (data) => {
   });
 });
 
+let coastData = [undefined, undefined, undefined];
+$.getJSON('data/coast-1960.geojson', data => {
+  coastData[0] = data;
+});
 
-let rasterLayer;
-$(() => {
-  fetch("")
-    .then(response => response.arrayBuffer())
-    .then(arrayBuffer => {
-      parseGeoraster(arrayBuffer).then(georaster => {
-        // let values = georaster.values.flat();
-        rasterLayer = new GeoRasterLayer({
-          georaster,
-          opacity: 0.7,
-          // pixelValuesToColorFn: values => {
-          //   if (values == 0) { return null }
-          //   return 
-          // },
-          resolution: 64,
-        });
-      });
-    });
+$.getJSON('data/coast-2016.geojson', data => {
+  coastData[1] = data;
+});
+$.getJSON('data/coast-poly.geojson', data => {
+  coastData[2] = data;
 });
 // =======================================
 // # section 2 #
@@ -169,12 +177,14 @@ sectionRenderer[2] = () => {
     L.circleMarker(pt, {
       color: 'darkorange',
       radius: 4,
+      weight: 2,
     }).addTo(allLayers);
   });
 
   L.polyline(pts, {
     color: 'darkorange',
     pane: 'traced',
+    weight: 2,
   }).addTo(allLayers);
 
   windLayer.addTo(allLayers);
@@ -186,35 +196,74 @@ sectionRenderer[2] = () => {
 sectionRenderer[3] = () => {
   if (!beap) return;
   let pts = beap.slice(30, 60).map(x => x.geometry.coordinates.slice().reverse());
-  let ptsPast = beap.slice(0, 30).map(x => x.geometry.coordinates.slice().reverse());
+  let ptsPast = beap.slice(0, 31).map(x => x.geometry.coordinates.slice().reverse());
+
+  L.polyline(ptsPast, {
+    color: 'gray',
+    weight: 2,
+    opacity: 0.6,
+  }).addTo(allLayers);
 
   pts.forEach((pt) => {
     L.circleMarker(pt, {
       color: 'darkorange',
       radius: 4,
+      weight: 2,
     }).addTo(allLayers);
   });
 
   L.polyline(pts, {
     color: 'darkorange',
     pane: 'traced',
+    weight: 2,
   }).addTo(allLayers);
 
-  ptsPast.forEach((ptPast) => {
-    L.circleMarker(ptPast, {
-      color: 'gray',
-      radius: 4,
-    }).addTo(allLayers);
-  });
-
-  L.polyline(ptsPast, {
-    color: 'gray',
-  }).addTo(allLayers);
+  // ptsPast.forEach((ptPast) => {
+  //   L.circleMarker(ptPast, {
+  //     color: 'gray',
+  //     radius: 3,
+  //   }).addTo(allLayers);
+  // });
 };
 
 sectionRenderer[4] = () => {
+  if (!coastData.every(Boolean)) {
+    setTimeout(sectionRenderer[4], 2000);
+    return;
+  }
+  L.geoJSON(coastData[0], {
+    color: '#05522d',
+    pane: 'traced',
+    weight: 2,
+  }).addTo(allLayers)
+    .bindTooltip('Coastline 1960s', {
+      direction: 'left',
+      className: 'coastline-pane coastline-1960',
+    })
+    .openTooltip([38.67, 117.37]);
 
+  L.geoJSON(coastData[1], {
+    color: '#ff4848',
+    pane: 'traced',
+    weight: 2,
+  }).addTo(allLayers)
+    .bindTooltip('Coastline 2016', {
+      direction: 'right',
+      className: 'coastline-pane coastline-2016',
+    })
+    .openTooltip([39.37, 119.38]);
 
+  L.geoJSON(coastData[2], {
+    color: 'darkorange',
+    weight: 2,
+    pane: 'poly',
+  }).addTo(allLayers)
+    .bindTooltip('Lost Habitat: 4063km<sup>2</sup>', {
+      offset: [20, 0],
+      direction: 'right',
+      className: 'leaflet-poly-pane',
+    })
+    .openTooltip([38.9, 120]);
 };
 
 
@@ -229,34 +278,60 @@ sectionRenderer[5] = () => {
   let pts = beap.slice(endN, 150).map(x => x.geometry.coordinates.slice().reverse());
   let ptsPast = beap.slice(0, endN).map(x => x.geometry.coordinates.slice().reverse());
 
+  // ptsPast.forEach((ptPast) => {
+  //   L.circleMarker(ptPast, {
+  //     color: 'gray',
+  //     radius: 4,
+  //   }).addTo(allLayers);
+  // });
+
+  L.polyline(ptsPast, {
+    color: 'gray',
+    weight: 2,
+    opacity: 0.6,
+  }).addTo(allLayers);
+
   pts.forEach((pt) => {
     L.circleMarker(pt, {
       color: 'darkorange',
       radius: 4,
+      weight: 2,
     }).addTo(allLayers);
   });
 
   L.polyline(pts, {
     color: 'darkorange',
     pane: 'traced',
-  }).addTo(allLayers);
-
-  ptsPast.forEach((ptPast) => {
-    L.circleMarker(ptPast, {
-      color: 'gray',
-      radius: 4,
-    }).addTo(allLayers);
-  });
-
-  L.polyline(ptsPast, {
-    color: 'gray',
+    weight: 2,
   }).addTo(allLayers);
 };
 
-$(() => {
-  onScroll();
-});
+sectionRenderer[6] = () => {
+  if (!beap) return;
+  let endN = 100;
+  let pts = beap.slice(endN, 150).map(x => x.geometry.coordinates.slice().reverse());
 
+  pts.forEach((pt) => {
+    L.circleMarker(pt, {
+      color: 'darkorange',
+      radius: 3,
+      weight: 1,
+    }).addTo(allLayers);
+  });
+};
+
+
+sectionRenderer[7] = () => {
+  if (!beap) return;
+  let endN = 0;
+  let pts = beap.slice(endN, 150).map(x => x.geometry.coordinates.slice().reverse());
+
+  L.polyline(pts, {
+    color: 'darkorange',
+    weight: 1,
+    // opacity: 0.6,
+  }).addTo(allLayers);
+};
 
 // L.canvasLayer()
 //   .delegate(this)

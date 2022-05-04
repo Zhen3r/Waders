@@ -1,5 +1,8 @@
 let nav = document.querySelector('div.navigation');
 let bg = document.querySelector('div.front-background');
+let timelineContainer = $('.timeline');
+let timeline = $('.timeline-axis-fill');
+let timelineDate = $('.timeline-pop');
 let firstRender = true;
 let secY;
 let secN;
@@ -59,6 +62,7 @@ let onScroll = () => {
     renderSection(newSecN);
     updatePath(newSecN);
     secN = newSecN;
+    updateTimeline();
   }
 };
 
@@ -67,14 +71,15 @@ let renderSection = (n) => {
     mapCenter,
     mapCenter,
     mapCenter,
-    [0, 115],
-    [35, 119],
-    [35, 119],
-    [60, 140],
-    [60, 140],
-    mapCenter,
+    [20, 120],
+    // [35, 119],
+    [39.7, 119.9],
+    [39.7, 119.9],
+    [66.95910199530246, 142.66571044921878],
+    [66.95910199530246, 142.66571044921878],
+    [29, 133],
   ];
-  const zoomLevels = [2.5, 5, 5, 5, 5, 5, 5, 2.5, 5, 5, 5];
+  const zoomLevels = [2.5, 5, 5, 5, 7, 5, 9, 2.5];
   const movingPct = 0.7;
 
   let lowerBound = Math.floor(n);
@@ -83,23 +88,25 @@ let renderSection = (n) => {
   mapZoom = map.getZoom();
   displaySectionGeo(lowerBound);
 
+  let [x1, y1] = dest[lowerBound];
+  let [x2, y2] = dest[upperBound];
+  let x = linearInsert(n, lowerBound, lowerBound + movingPct, x1, x2);
+  let y = linearInsert(n, lowerBound, lowerBound + movingPct, y1, y2);
+  camera.setDestination(x, y);
+
   if (z !== mapZoom) {
     // changing map zoom
     if (isDuringZoom) return;
-    map.flyTo(map.getCenter(), z, { duration: 2 });
+    let zoomTime = 0.8; // second
+    // map.flyTo(map.getCenter(), z, { duration: zoomTime });
+    camera.update(z, zoomTime);
     isDuringZoom = true;
     setTimeout(() => {
       isDuringZoom = false;
-    }, 2000);
+    }, zoomTime * 1000);
   } else {
     // changing map center
     isDuringZoom = false;
-    let [x1, y1] = dest[lowerBound];
-    let [x2, y2] = dest[upperBound];
-    let x = linearInsert(n, lowerBound, lowerBound + movingPct, x1, x2);
-    let y = linearInsert(n, lowerBound, lowerBound + movingPct, y1, y2);
-
-    camera.setDestination(x, y);
     camera.update();
   }
 };
@@ -128,15 +135,48 @@ let clearLayers = () => {
 };
 
 let updatePath = (n) => {
-  secN -= Math.floor(n);
+  let nn = n - Math.floor(n);
   // to stop moving when the card shows, or it will be distracting
-  secN = linearInsert(secN, 0, 0.7, 0, 1);
-  const tracedPathEls = $('.leaflet-traced-pane path');
+  if (Math.floor(n) === 4) {
+    let nnn = linearInsert(nn, 0.45, 0.7, 0, 1);
+    const tracedPoly = $('.leaflet-poly-pane');
+    for (const pathEl of tracedPoly) {
+      pathEl.style.opacity = `${nnn}`;
+    }
 
+    nnn = linearInsert(nn, 0.15, 0.5, 0, 1);
+    let nnn2 = linearInsert(nn, 0.5, 0.7, 1, 0);
+
+    const tracedPathEls = $('.leaflet-traced-pane path');
+    for (const pathEl of tracedPathEls) {
+      const totalLength = pathEl.getTotalLength();
+      pathEl.style.strokeDasharray = `${totalLength * nnn}, ${totalLength}`;
+      pathEl.style.opacity = `${nnn2}`;
+    }
+    $('.coastline-pane').css({ opacity: nnn2 });
+    return;
+  }
+
+
+  nn = linearInsert(nn, 0, 0.7, 0, 1);
+
+  const tracedPathEls = $('.leaflet-traced-pane path');
   for (const pathEl of tracedPathEls) {
     const totalLength = pathEl.getTotalLength();
-    pathEl.style.strokeDasharray = `${totalLength * secN}, ${totalLength}`;
+    pathEl.style.strokeDasharray = `${totalLength * nn}, ${totalLength}`;
   }
+};
+
+let updateTimeline = () => {
+  let h = window.scrollY;
+  let h0 = linearInsert(h, secY[1], secY[2], 0, 1);
+  timelineContainer.css({ opacity: h0 });
+  let h1 = linearInsert(h, secY[1], secY[secY.length - 3], 0, 100);
+  timeline.css({ height: `${h1}%` });
+  let h2 = linearInsert(h, secY[1], secY[secY.length - 3], 1364393806000, 1370906381000);
+  let date = new Date(h2);
+  let [m, d] = date.toDateString().split(' ').slice(1, 3);
+  timelineDate.html(`${m}<br>${d}`);
 };
 
 // scroll animation and slide control
@@ -144,15 +184,19 @@ $(document).on('scroll', onScroll);
 
 // getting all the Y of slides
 $(() => {
-  onScroll();
-  firstRender = false;
-
   secY = $('div.section').toArray().map((div) => {
     let { top } = $(div).position();
     let height = $(div).height();
-    return top + height;
+    let offset = window.innerWidth < 700 ? 500 : 0;
+    return top + height + offset;
   });
   secY.unshift(0);
-  secY.push(secY[secY.length - 1] + $('div.section').last().height());
+  secY[secY.length - 1] += 1000;
+  secY.push(secY[secY.length - 1] + 5000);
   console.log(secY);
+
+  onScroll();
+  firstRender = false;
+  // setTimeout(onScroll, 600);
+  // setTimeout(onScroll, 300);
 });
