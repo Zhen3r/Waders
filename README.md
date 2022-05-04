@@ -6,6 +6,8 @@ MUSA 611 Final Project
 
 [Project Website](http://zhenzhaoxu.com/Waders)
 
+tinyurl.com/611wader 
+
 <img title="" src="media/website.png" alt="">
 
 ## Project Proposal
@@ -27,14 +29,14 @@ The project will focus mainly on a summer of several waders. In particular:
 
 - Detailed migration routes and their travel time.
 - Basic informations about this species.
-- The rapid changing (land cover / pollution) of their habitats from ~2000 to ~2020 using raster dataset from *google earth engine*.
+- The rapid changing (land cover) of their habitats from ~2000 to ~2020 using raster dataset from *google earth engine*.
 - The relationship between wind and migration.
 - Migration data visualization including speed and time.
 - (If applicable) Population size and conservation status.
 
 ### Goal
 
-* Increase interest in birds and emphasize the need and effectiveness of environmental protection。
+* Increase interest in birds and emphasize the need and effectiveness of environmental protection.
 
 ### Users
 
