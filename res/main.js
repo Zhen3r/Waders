@@ -113,9 +113,19 @@ camera.setDestination(...mapCenter);
 // getting data
 
 let beap;
+let beaps = {};
 $.getJSON('data/trail-great.geojson', (data) => {
   // console.log(data.features);
   beap = data.features.filter((x) => x.properties['individual-local-identifier'] === 'XNC');
+  data.features.forEach(f => {
+    let name = f.properties['individual-local-identifier'];
+    let [y, x] = f.geometry.coordinates;
+    if (name in beaps) {
+      beaps[name].push([x, y]);
+    } else {
+      beaps = Object.assign(beaps, { [name]: [[x, y]] });
+    }
+  });
 });
 
 let windLayer;
@@ -322,19 +332,25 @@ sectionRenderer[6] = () => {
 
 
 sectionRenderer[7] = () => {
-  if (!beap) return;
-  let endN = 0;
-  let pts = beap.slice(endN, 150).map(x => x.geometry.coordinates.slice().reverse());
+  if (!beaps) return;
+  let endNs = [150, 150, 150, 150, 130, 150, 150, 150, 150];
 
-  L.polyline(pts, {
-    color: 'darkorange',
-    weight: 1,
-    // opacity: 0.6,
-  }).addTo(allLayers);
+  for (let k of Object.keys(beaps)) {
+    let abeap = beaps[k];
+    let endN = endNs.shift();
+    let pts = abeap.slice(0, endN);
+    let c = Math.random() * 150 + 50;
+    L.polyline(pts, {
+      color: `rgb(245,${c},40)`,
+      weight: 1,
+    }).addTo(allLayers)
+      .bindTooltip(k, { direction: 'auto' })
+      .openTooltip();
+  }
 };
 
 
-sectionRenderer[8] = () => { };
+sectionRenderer[8] = sectionRenderer[7].bind(this);
 // L.canvasLayer()
 //   .delegate(this)
 //   .addTo(map);
