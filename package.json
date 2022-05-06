@@ -3,9 +3,7 @@
     "georaster": "^1.5.6",
     "http-server": "^14.1.0",
     "jquery": "^3.6.0",
-    "leaflet": "^1.7.1"
-  },
-  "devDependencies": {
+    "leaflet": "^1.7.1",
     "eslint": "^8.6.0",
     "eslint-config-airbnb": "^19.0.4"
   },
@@ -17,18 +15,33 @@
       "$": "readonly",
       "document": "readonly",
       "fetch": "readonly",
+      "navigator": "readonly",
+      "window": "readonly",
+      "ApexCharts": "readonly",
+      "Chart": "readonly",
+      "mapboxgl": "readonly",
+      "Plotly": "readonly",
       "htmlToElement": "readonly",
       "htmlToElements": "readonly"
     },
     "rules": {
+      "arrow-body-style": "off",
       "arrow-parens": "off",
+      "camelcase": "off",
+      "comma-dangle": "off",
+      "func-names": "off",
       "no-console": "off",
+      "no-loop-func": "off",
       "no-plusplus": "off",
       "no-multiple-empty-lines": "off",
       "no-multi-spaces": "off",
+      "no-unused-vars": "off",
+      "no-var": "off",
       "prefer-const": "off",
       "no-use-before-define": "off",
       "no-undef": "off",
+      "quote-props": "off",
+      "quotes": "off",
       "no-restricted-syntax": [
         "error",
         {

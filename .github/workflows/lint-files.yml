@@ -1,7 +1,7 @@
 name: Testing the JavaScript code style
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
 
 jobs:
